@@ -27,10 +27,9 @@ function fib(i::Int) # расчет значений чисел Фибоначч
     end
 end
 
-function myfibvecs(n::Int=1)  # формирование вектора(ов)
-    if length(n)==1 # если аргумент - число
-        return [fib(i) for i in n:n+2 ]
-    else
-        return [[fib(i) for i in ni:ni+2 ] for ni in n]
-    end
+function myfibvecs(n::Int=1) # если аргумент - число 
+    return [fib(i) for i in n:n+2 ] # формирование вектора
+end
+function myfibvecs(n::Array{Int}) # если аргумент - число
+    return [[fib(i) for i in ni:ni+2 ] for ni in n]
 end
