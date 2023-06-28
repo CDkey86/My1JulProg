@@ -3,7 +3,7 @@ include("./MyM1.jl");
 using .MyM1
 @doc MyM1
 
-# тестирование
+#= тестирование
 @testset "Тестирование" begin
    @testset "Случайные" begin
        @test length(myrndvecs())==2 

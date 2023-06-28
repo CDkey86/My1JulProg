@@ -8,9 +8,7 @@
 ...
 """
 module MyM1
-include("./myrndvecs.jl")
-include("./myfibvecs.jl")
-include("./myaprogvecs.jl")
-export  myrndvecs, myfibvecs, myaprogvecs
+include("./myfun.jl")
+export  myfun
 
 end
