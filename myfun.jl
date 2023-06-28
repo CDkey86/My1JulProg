@@ -21,7 +21,7 @@ struct Rnd
 end
 
 function gen(fib::Fibonacci)
-0
+return 0
 end
 
 function myfun(str::String, n::Int) # основной метод
