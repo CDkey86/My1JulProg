@@ -19,17 +19,14 @@ function Base.iterate(fib::Fib, state)
     end
 end 
 =#
-function fib(i::Int) # расчет значений чисел Фибоначчи
-    if i==1 || i==2
-        return 1
-    else
-        return fib(i-1)+fib(i-2) # рекурсия спасет мир (или уничтожит)
-    end
-end
 
 function myfibvecs(n::Int=1) # если аргумент - число 
-    return [fib(i) for i in n:n+2 ] # формирование вектора
+    v=[1,1,2] # начальное значение
+    for i=2:n 
+        (v[1],v[2],v[3]) = (v[2],v[3],v[2]+v[3])
+    end
+    return v 
 end
 function myfibvecs(n::Array{Int}) # если аргумент - число
-    return [[fib(i) for i in ni:ni+2 ] for ni in n]
+    return [myfibvecs(ni) for ni in n]
 end

@@ -1,7 +1,7 @@
 using Test
 include("./MyM1.jl");
 using .MyM1
-@show @doc MyM1
+@doc MyM1
 
 # тестирование
 @testset "Тестирование" begin
