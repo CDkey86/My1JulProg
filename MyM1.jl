@@ -9,6 +9,6 @@
 """
 module MyM1
 include("./myfun.jl")
-export  myfun
+export  mygenfun
 
 end
