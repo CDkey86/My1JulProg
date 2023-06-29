@@ -8,6 +8,7 @@ using .MyM1
    @testset "Случайные" begin
         @test length(mygenfun("rnd"))==2 
         @test isa(mygenfun("rnd"),Vector{Int}) 
+        @test 0 <= mygenfun("rnd")[1] <= 100
     end
     @testset "Фибоначчи" begin
         @test length(mygenfun("fib"))==3 
