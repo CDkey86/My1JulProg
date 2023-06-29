@@ -7,26 +7,18 @@
 'rnd' - случайные числа
 ...
 """
-struct Fibonacci
-    state::Int # номер 
-    FNum::Int  # число Фибонначи
-end
-struct Rnd 
-    an::Int  # член прогрессии
-    d::Int # шаг
-end
-
-struct ArifmProgrVector <: AbstractArray{Int, 1}
+struct ArifmProgrVector <: AbstractArray{Int, 1} # вектор арифметических прогрессий
     count::Int # количество элементов
     a1::Int # первый член
     d::Int # разность
+    # параметры по умолчанию:
     ArifmProgrVector(count=1,a1=1,d=1) = new(count,a1,d)
 end
 Base.size(S::ArifmProgrVector) = (S.count,)
 Base.IndexStyle(::Type{<:ArifmProgrVector}) = IndexLinear()
 Base.getindex(S::ArifmProgrVector, i::Int) = S.a1 + S.d*(i-1)
 
-struct IntRndVector <: AbstractArray{Int, 1}
+struct IntRndVector <: AbstractArray{Int, 1} # вектор случайных чисел
     count::Int # количество элементов
     a::Int # границы диапазона
     b::Int # разность
@@ -36,18 +28,31 @@ Base.size(S::IntRndVector) = (S.count,)
 Base.IndexStyle(::Type{<:IntRndVector}) = IndexLinear()
 Base.getindex(S::IntRndVector, i::Int) = Int(round( S.a + (S.b-S.a)*rand() ))
 
-
-function gen(fib::Fibonacci)
-return 0
+# числ Фибоначчи
+struct Fibonacci 
+    N::Int # номер 
 end
+# # # # # # #
+Base.iterate(fib::Fibonacci) = (0,(1,1))
+Base.iterate(fib::Fibonacci, state) = (0,(1,1))
+# # # # # # # 
 
-function mygenfun(str::String, n::Int,param...) # основной метод
+# вектор чисел Фибоначчи
+struct FibVector <: AbstractArray{Fibonacci, 1} 
+    count::Int # количество элементов
+end
+Base.size(S::FibVector) = (S.count,)
+Base.IndexStyle(::Type{<:FibVector}) = IndexLinear()
+Base.getindex(S::FibVector, i::Int) = Fibonacci(i)
+
+# основная функция
+function mygenfun(str::String, n::Int, param...) 
     if str=="aprog"
         obj=ArifmProgrVector(n,param);
-    elseif str=="fib"
-        obj=Fib(n);
     elseif str=="rnd"
         obj=RnIntRndVectord(n,param);
+    elseif str=="fib"
+        obj=FibVector(n);
     else
         return error("Ошибочка вышла! Укажите правильный тип")
     end
