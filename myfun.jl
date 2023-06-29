@@ -8,6 +8,8 @@
 ...
 """
 
+abstract type MyGen end
+
 mutable struct ArifmProgr <: MyGen # объект арифметических прогрессий
     an::Int
     # параметры по умолчанию:
