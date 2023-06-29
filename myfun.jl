@@ -32,9 +32,9 @@ Base.getindex(S::IntRndVector, i::Int) = Int(round( S.a + (S.b-S.a)*rand() ))
 struct Fibonacci 
     N::Int # номер 
 end
-# # # # # # #
-Base.iterate(fib::Fibonacci) = (0,(1,1))
-Base.iterate(fib::Fibonacci, state) = (0,(1,1))
+# # !надо разобраться! # # # # #
+# Base.iterate(fib::Fibonacci) = (0,(1,1))
+# Base.iterate(fib::Fibonacci, state) = (0,(1,1))
 # # # # # # # 
 
 # вектор чисел Фибоначчи
