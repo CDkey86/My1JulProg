@@ -6,21 +6,17 @@ using .MyM1
 # тестирование
 @testset "Тестирование" begin
    @testset "Случайные" begin
-       @test length(myrndvecs())==2 
-       @test length(myrndvecs(0,[1,10,100,1000]))==4 
-       @test length(myrndvecs(0,[1,10,100,1000])[1])==2
+        @test length(mygenfun("rnd"))==2 
+        @test isa(mygenfun("rnd"),Vector{Int}) 
     end
     @testset "Фибоначчи" begin
-        @test length(myfibvecs())==3
-        @test myfibvecs()==[1,1,2]
-        @test myfibvecs(15)==[610, 987, 1597]
-        @test myfibvecs([5,10])==[[5,8,13], [55,89,144]]
+        @test length(mygenfun("fib"))==3 
+        @test isa(mygenfun("fib"),Vector{BigInt}) 
+        @test mygenfun("fib")==[13,21,34]
     end
     @testset "Арифметическая прогрессия" begin
-        @test length(myaprogvecs())==4
-        @test myaprogvecs()==[0,1,2,3]
-        @test myaprogvecs(5)==[5,6,7,8]
-        @test myaprogvecs(3,-0.5) ≈ [3, 2.5, 2, 1.5]
-        @test myaprogvecs([5.5, -1], 3) ≈ [[5.5, 8.5, 11.5, 14.5], [-1.0, 2.0, 5.0, 8.0]]
+        @test length(mygenfun("aprog"))==4
+        @test isa(mygenfun("aprog"),Vector{Int})
+        @test mygenfun("aprog")==[9,10,11,12] 
     end
 end;
