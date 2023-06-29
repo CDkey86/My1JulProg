@@ -1,13 +1,3 @@
-"""
-...
-    mygenfun(str)
-Генерирует массив из нескольких членов указанной последовательности.
-`aprog`` - арифметическая прогрессия, 4 числа
-`fib` - числа Фибоначчи, 3 числа
-`rnd` - случайные числа, 2 числа
-...
-"""
-
 abstract type MyGen # абстрактный супертип
 end
 
@@ -39,7 +29,17 @@ objarifm=ArifmProgr()
 objrnd=IntRnd()
 objfib=Fibo()
 
+
 # основная функция
+"""
+...
+    mygenfun(str)
+Генерирует массив из нескольких членов указанной последовательности.
+`aprog`` - арифметическая прогрессия, 4 числа
+`fib` - числа Фибоначчи, 3 числа
+`rnd` - случайные числа, 2 числа
+...
+"""
 function mygenfun(str::String) 
     if str=="aprog"
         obj=objarifm
@@ -51,8 +51,10 @@ function mygenfun(str::String)
         obj=objfib
         n=3
     else
-        error("Ошибочка вышла! Укажите правильный тип (aprog,rnd,fib)")
-        return nothing
+        error("Ошибочка вышла! Укажите правильный тип \n(aprog,rnd,fib)")
     end
     return genVec(obj,n)
+end
+function mygenfun() # метод без аргумента
+    error("Ошибочка вышла! Укажите правильный тип \n(aprog,rnd,fib)")
 end
