@@ -15,7 +15,7 @@ mutable struct ArifmProgr <: MyGen # объект арифметических �
     # параметры по умолчанию:
     ArifmProgr(an=0) = new(an)
 end
-gen(a::ArifmProgr) = 
+gen(a::ArifmProgr) = a.an +=1
 
 mutable struct IntRnd <: MyGen # объект случайных чисел
 end
