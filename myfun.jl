@@ -20,8 +20,9 @@ Base.getindex(S::ArifmProgrVector, i::Int) = S.a1 + S.d*(i-1)
 
 struct IntRndVector <: AbstractArray{Int, 1} # вектор случайных чисел
     count::Int # количество элементов
-    a::Int # границы диапазона
-    b::Int # разность
+    # границы диапазона
+    a::Int 
+    b::Int  
     IntRndVector(count=1,a=0,b=10) = new(count,a,b)
 end
 Base.size(S::IntRndVector) = (S.count,)
