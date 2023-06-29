@@ -7,44 +7,29 @@
 'rnd' - случайные числа
 ...
 """
-struct ArifmProgrVector <: AbstractArray{Int, 1} # вектор арифметических прогрессий
-    count::Int # количество элементов
-    a1::Int # первый член
-    d::Int # разность
-    # параметры по умолчанию:
-    ArifmProgrVector(count=1,a1=1,d=1) = new(count,a1,d)
-end
-Base.size(S::ArifmProgrVector) = (S.count,)
-Base.IndexStyle(::Type{<:ArifmProgrVector}) = IndexLinear()
-Base.getindex(S::ArifmProgrVector, i::Int) = S.a1 + S.d*(i-1)
 
-struct IntRndVector <: AbstractArray{Int, 1} # вектор случайных чисел
-    count::Int # количество элементов
-    # границы диапазона
-    a::Int 
-    b::Int  
-    IntRndVector(count=1,a=0,b=10) = new(count,a,b)
+mutable struct ArifmProgr <: MyGen # объект арифметических прогрессий
+    an::Int
+    # параметры по умолчанию:
+    ArifmProgr(an=0) = new(an)
 end
-Base.size(S::IntRndVector) = (S.count,)
-Base.IndexStyle(::Type{<:IntRndVector}) = IndexLinear()
-Base.getindex(S::IntRndVector, i::Int) = Int(round( S.a + (S.b-S.a)*rand() ))
+gen(a::ArifmProgr) = 
+
+mutable struct IntRnd <: MyGen # объект случайных чисел
+end
+gen(a::IntRnd)=Int(round(100*rand()))
 
 # числ Фибоначчи
-struct Fibonacci 
-    N::Int # номер 
+mutable struct Fibo <: MyGen
+    curr::BigInt # 
+    pred::BigInt 
+    Fibo(curr=1,pred=0)=new(curr,pred)
 end
-# # !надо разобраться! # # # # #
-# Base.iterate(fib::Fibonacci) = (0,(1,1))
-# Base.iterate(fib::Fibonacci, state) = (0,(1,1))
-# # # # # # # 
+gen(a::Fibo)= (a.pred,a.curr = a.curr, a.curr+a.pred)
 
-# вектор чисел Фибоначчи
-struct FibVector <: AbstractArray{Fibonacci, 1} 
-    count::Int # количество элементов
-end
-Base.size(S::FibVector) = (S.count,)
-Base.IndexStyle(::Type{<:FibVector}) = IndexLinear()
-Base.getindex(S::FibVector, i::Int) = Fibonacci(i)
+# вектор чисел
+genVec(obi::MyGen, n::Int)=[gen(obj)[1] for i in 1:n]
+
 
 # основная функция
 function mygenfun(str::String, n::Int, param...) 
