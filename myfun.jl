@@ -1,6 +1,6 @@
 """
 ...
-    mygenfun(str,n,[param...])
+    mygenfun(str[,n])
 Генерирует массив из n членов указанной последовательности.
 'aprog' - арифметическая прогрессия
 'fib' - числа Фибоначчи
@@ -8,7 +8,8 @@
 ...
 """
 
-abstract type MyGen end
+abstract type MyGen 
+end
 
 mutable struct ArifmProgr <: MyGen # объект арифметических прогрессий
     an::Int
@@ -17,11 +18,13 @@ mutable struct ArifmProgr <: MyGen # объект арифметических �
 end
 gen(a::ArifmProgr) = a.an +=1
 
-mutable struct IntRnd <: MyGen # объект случайных чисел
+
+# объект случайных чисел
+mutable struct IntRnd <: MyGen 
 end
 gen(a::IntRnd)=Int(round(100*rand()))
 
-# числ Фибоначчи
+# числа Фибоначчи
 mutable struct Fibo <: MyGen
     curr::BigInt # 
     pred::BigInt 
@@ -29,21 +32,24 @@ mutable struct Fibo <: MyGen
 end
 gen(a::Fibo)= (a.pred,a.curr = a.curr, a.curr+a.pred)
 
-# вектор чисел
-genVec(obi::MyGen, n::Int)=[gen(obj)[1] for i in 1:n]
+# генерируем вектор чисел
+genVec(obj::MyGen, n::Int)=[gen(obj)[1] for i in 1:n]
 
 
 # основная функция
 function mygenfun(str::String, n::Int, param...) 
     if str=="aprog"
-        obj=ArifmProgrVector(n,param);
+        obj=ArifmProgr()
+        n=4
     elseif str=="rnd"
-        obj=RnIntRndVectord(n,param);
+        obj=IntRnd()
+        n=2
     elseif str=="fib"
-        obj=FibVector(n);
+        obj=Fib()
+        n=3
     else
         println("Ошибочка вышла! Укажите правильный тип (aprog,rnd,fib)")
         return nothing
     end
-    return collect(obj)
+    return genVec(obj,n)
 end
