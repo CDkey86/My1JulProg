@@ -55,7 +55,8 @@ function mygenfun(str::String, n::Int, param...)
     elseif str=="fib"
         obj=FibVector(n);
     else
-        return error("Ошибочка вышла! Укажите правильный тип")
+        println("Ошибочка вышла! Укажите правильный тип (aprog,rnd,fib)")
+        return nothing
     end
     return collect(obj)
 end
